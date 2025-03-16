@@ -1,0 +1,97 @@
+,Names,Noms,Type,PV,Attaque,Attaque Spéciale,Défense,Défense Spéciale,Vitesse,Génération,Somme Stats,Moyenne Statistique
+0,Grookey,Ouistempo,['Plante'],50,65,40,50,40,65,2,310,51.67
+1,Thwackey,Badabouin,['Plante'],70,85,55,70,60,80,2,420,70.0
+2,Rillaboom,Gorythmic,['Plante'],100,125,60,90,70,85,2,530,88.33
+3,Scorbunny,Flambino,['Feu'],50,71,40,40,40,69,2,310,51.67
+4,Raboot,Lapyro,['Feu'],65,86,55,60,60,94,2,420,70.0
+5,Cinderace,Pyrobut,['Feu'],80,116,65,75,75,119,2,530,88.33
+6,Sobble,Larméléon,['Eau'],50,40,70,40,40,70,2,310,51.67
+7,Drizzile,Arrozard,['Eau'],65,60,95,55,55,90,2,420,70.0
+8,Inteleon,Lézargus,['Eau'],70,85,125,65,65,120,2,530,88.33
+9,Skwovet,Rongourmand,['Normal'],70,55,35,55,35,25,2,275,45.83
+10,Greedent,Rongrigou,['Normal'],120,95,55,95,75,20,2,460,76.67
+11,Rookidee,Minisange,['Vol'],38,47,33,35,35,57,2,245,40.83
+12,Corvisquire,Bleuseille,['Vol'],68,67,43,55,55,77,2,365,60.83
+13,Corviknight,Corvaillus,"['Vol', 'Acier']",98,87,53,105,85,67,2,495,82.5
+14,Blipbug,Larvadar,['Insecte'],25,20,25,20,45,45,2,180,30.0
+15,Dottler,Coléodôme,"['Insecte', 'Psy']",50,35,50,80,90,30,2,335,55.83
+16,Orbeetle,Astronelle,"['Insecte', 'Psy']",60,45,80,110,120,90,2,505,84.17
+17,Nickit,Goupilou,['Ténèbres'],40,28,47,28,52,50,2,245,40.83
+18,Thievul,Roublenard,['Ténèbres'],70,58,87,58,92,90,2,455,75.83
+19,Gossifleur,Tournicoton,['Plante'],40,40,40,60,60,10,2,250,41.67
+20,Eldegoss,Blancoton,['Plante'],60,50,80,90,120,60,2,460,76.67
+21,Wooloo,Moumouton,['Normal'],42,40,40,55,45,48,2,270,45.0
+22,Dubwool,Moumouflon,['Normal'],72,80,60,100,90,88,2,490,81.67
+23,Chewtle,Khélocrok,['Eau'],50,64,38,50,38,44,2,284,47.33
+24,Drednaw,Torgamord,"['Eau', 'Roche']",90,115,48,90,68,74,2,485,80.83
+25,Yamper,Voltoutou,['Électrik'],59,45,40,50,50,26,2,270,45.0
+26,Boltund,Fulgudog,['Électrik'],69,90,90,60,60,121,2,490,81.67
+27,Rolycoly,Charbi,['Roche'],30,40,40,50,50,30,2,240,40.0
+28,Carkol,Wagomine,"['Roche', 'Feu']",80,60,60,90,70,50,2,410,68.33
+29,Coalossal,Monthracite,"['Roche', 'Feu']",110,80,80,120,90,30,2,510,85.0
+30,Applin,Verpom,"['Plante', 'Dragon']",40,40,40,80,40,20,2,260,43.33
+31,Flapple,Pomdrapi,"['Plante', 'Dragon']",70,110,95,80,60,70,2,485,80.83
+32,Appletun,Dratatin,"['Plante', 'Dragon']",110,85,100,80,80,30,2,485,80.83
+33,Silicobra,Dunaja,['Sol'],52,57,35,75,50,46,2,315,52.5
+34,Sandaconda,Dunaconda,['Sol'],72,107,65,125,70,71,2,510,85.0
+35,Cramorant,Nigosier,"['Vol', 'Eau']",70,85,85,55,95,85,2,475,79.17
+36,Arrokuda,Embrochet,['Eau'],41,63,40,40,30,66,2,280,46.67
+37,Barraskewda,Hastacuda,['Eau'],61,123,60,60,50,136,2,490,81.67
+38,Toxel,Toxizap,"['Électrik', 'Poison']",40,38,54,35,35,40,2,242,40.33
+39,Toxtricity,Salarsen,"['Électrik', 'Poison']",75,98,114,70,70,75,2,502,83.67
+40,Sizzlipede,Grillepattes,"['Feu', 'Insecte']",50,65,50,45,50,45,2,305,50.83
+41,Centiskorch,Scolocendre,"['Feu', 'Insecte']",100,115,90,65,90,65,2,525,87.5
+42,Clobbopus,Poulpaf,['Combat'],50,68,50,60,50,32,2,310,51.67
+43,Grapploct,Krakos,['Combat'],80,118,70,90,80,42,2,480,80.0
+44,Sinistea,Théffroi,['Spectre'],40,45,74,45,54,50,2,308,51.33
+45,Polteageist,Polthégeist,['Spectre'],60,65,134,65,114,70,2,508,84.67
+46,Hatenna,Bibichut,['Psy'],42,30,56,45,53,39,2,265,44.17
+47,Hattrem,Chapotus,['Psy'],57,40,86,65,73,49,2,370,61.67
+48,Hatterene,Sorcilence,"['Psy', 'Fée']",57,90,136,95,103,29,2,510,85.0
+49,Impidimp,Grimalin,"['Ténèbres', 'Fée']",45,45,55,30,40,50,2,265,44.17
+50,Morgrem,Fourbelin,"['Ténèbres', 'Fée']",65,60,75,45,55,70,2,370,61.67
+51,Grimmsnarl,Angoliath,"['Ténèbres', 'Fée']",95,120,95,65,75,60,2,510,85.0
+52,Obstagoon,Ixon,"['Ténèbres', 'Normal']",93,90,60,101,81,95,2,520,86.67
+53,Perrserker,Berserkatt,['Acier'],70,110,50,100,60,50,2,440,73.33
+54,Cursola,Corayôme,['Spectre'],60,95,145,50,130,30,2,510,85.0
+55,Sirfetch'd,Palarticho,['Combat'],62,135,68,95,82,65,2,507,84.5
+56,Mr. Rime,M. Glaquette,"['Glace', 'Psy']",80,85,110,75,100,70,2,520,86.67
+57,Runerigus,Tutétékri,"['Sol', 'Spectre']",58,95,50,145,105,30,2,483,80.5
+58,Milcery,Crèmy,['Fée'],45,40,50,40,61,34,2,270,45.0
+59,Alcremie,Charmilly,['Fée'],65,60,110,75,121,64,2,495,82.5
+60,Falinks,Hexadron,['Combat'],65,100,70,100,60,75,2,470,78.33
+61,Pincurchin,Wattapik,['Électrik'],48,101,91,95,85,15,2,435,72.5
+62,Snom,Frissonille,"['Glace', 'Insecte']",30,25,45,35,30,20,2,185,30.83
+63,Frosmoth,Beldeneige,"['Glace', 'Insecte']",70,65,125,60,90,65,2,475,79.17
+64,Stonjourner,Dolman,['Roche'],100,125,20,135,20,70,2,470,78.33
+65,Eiscue,Bekaglaçon,['Glace'],75,80,65,110,90,50,2,470,78.33
+66,Indeedee,Wimessir,"['Psy', 'Normal']",60,65,105,55,95,95,2,475,79.17
+67,Morpeko,Morpeko,"['Électrik', 'Ténèbres']",58,95,70,58,58,97,2,436,72.67
+68,Cufant,Charibari,['Acier'],72,80,40,49,49,40,2,330,55.0
+69,Copperajah,Pachyradjah,['Acier'],122,130,80,69,69,30,2,500,83.33
+70,Dracozolt,Galvagon,"['Électrik', 'Dragon']",90,100,80,90,70,75,2,505,84.17
+71,Arctozolt,Galvagla,"['Électrik', 'Glace']",90,100,90,90,80,55,2,505,84.17
+72,Dracovish,Hydragon,"['Eau', 'Dragon']",90,90,70,100,80,75,2,505,84.17
+73,Arctovish,Hydragla,"['Eau', 'Glace']",90,90,80,100,90,55,2,505,84.17
+74,Duraludon,Duralugon,"['Acier', 'Dragon']",70,95,120,115,50,85,2,535,89.17
+75,Dreepy,Fantyrm,"['Dragon', 'Spectre']",28,60,40,30,30,82,2,270,45.0
+76,Drakloak,Dispareptil,"['Dragon', 'Spectre']",68,80,60,50,50,102,2,410,68.33
+77,Dragapult,Lanssorien,"['Dragon', 'Spectre']",88,120,100,75,75,142,2,600,100.0
+78,Zacian,Zacian,['Fée'],92,130,80,115,115,138,2,670,111.67
+79,Zamazenta,Zamazenta,['Combat'],92,130,80,115,115,138,2,670,111.67
+80,Eternatus,Éthernatos,"['Poison', 'Dragon']",140,85,145,95,95,130,2,690,115.0
+81,Kubfu,Wushours,['Combat'],60,90,53,60,50,72,2,385,64.17
+82,Urshifu,Shifours,"['Combat', 'Ténèbres']",100,130,63,100,60,97,2,550,91.67
+83,Zarude,Zarude,"['Ténèbres', 'Plante']",105,120,70,105,95,105,2,600,100.0
+84,Regieleki,Regieleki,['Électrik'],80,100,100,50,50,200,2,580,96.67
+85,Regidrago,Regidrago,['Dragon'],200,100,100,50,50,80,2,580,96.67
+86,Glastrier,Blizzeval,['Glace'],100,145,65,130,110,30,2,580,96.67
+87,Spectrier,Spectreval,['Spectre'],100,65,145,60,80,130,2,580,96.67
+88,Calyrex,Sylveroy,"['Psy', 'Plante']",100,80,80,80,80,80,2,500,83.33
+89,Wyrdeer,Cerbyllin,"['Normal', 'Psy']",103,105,105,72,75,65,2,525,87.5
+90,Kleavor,Hachécateur,"['Insecte', 'Roche']",70,135,45,95,70,85,2,500,83.33
+91,Ursaluna,Ursaking,"['Sol', 'Normal']",130,140,45,105,80,50,2,550,91.67
+92,Basculegion,Paragruel,"['Eau', 'Spectre']",120,112,80,65,75,78,2,530,88.33
+93,Sneasler,Farfurex,"['Combat', 'Poison']",80,130,40,60,80,120,2,510,85.0
+94,Overqwil,Qwilpik,"['Ténèbres', 'Poison']",85,115,65,95,65,85,2,510,85.0
+95,Enamorus,Amovénus,"['Fée', 'Vol']",74,115,135,70,80,106,2,580,96.67
