@@ -19,7 +19,8 @@ with cent_co:
         st.markdown(
     """
     <div style="text-align: center;">
-        <img src="https://github.com/LeTibs/pokemon/blob/main/Data/Images/logo-Pokemon.jpg" width="250">
+        <img src="https://raw.githubusercontent.com/LeTibs/pokemon/main/Data/Images/logo-Pokemon.jpg
+" width="250">
     </div>
     """,
     unsafe_allow_html=True
@@ -101,16 +102,10 @@ st.pyplot(fig2)
 
 # ---- Comparaison de Pokémon ----
 
-image_folder = "Data/Images"
-image_extensions = [".png", ".jpg", ".jpeg", ".webp"]
+base_url = "https://raw.githubusercontent.com/LeTibs/pokemon/main/Data/Images/"
 
 def get_pokemon_image_path(pokemon_name):
-    """Retourne le chemin de l'image du Pokémon si elle existe, sinon None."""
-    for ext in image_extensions:
-        path = os.path.join(image_folder, f"{pokemon_name}{ext}")  # Conserve la majuscule
-        if os.path.exists(path):
-            return path
-    return None
+    return f"{base_url}{pokemon_name}.png"
 
 # ---- Création des Colonnes ----
 col1, col2, col3 = st.columns([1, 2, 1])  # La colonne centrale est plus large
