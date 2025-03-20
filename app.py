@@ -4,10 +4,14 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import cv2
+from PIL import Image
+from io import BytesIO
+from sklearn.cluster import KMeans
+from utils import get_dominant_color, get_pokemon_image_path, get_pokemon_stats, load_pokemon_data, type_colors
 
 # Charger les données
-file_path = "Data/pokemon_all_gen.csv"
-df = pd.read_csv(file_path)
+df = load_pokemon_data()
 
 # Nettoyage du type
 df['Type'] = df['Type'].apply(lambda x: eval(x) if isinstance(x, str) else x)
@@ -84,10 +88,28 @@ type_filter = st.sidebar.multiselect("Sélectionner un type", df['Primary Type']
 # Filtrage des données
 filtered_df = df[(df['Génération'].between(*gen_filter)) & (df['Primary Type'].isin(type_filter))]
 
-# ---- Scatter Plot ----
-st.subheader("Répartition des Pokémon par Type et Puissance")
-fig1 = px.scatter(filtered_df, x='Noms', y='Somme Stats', color='Primary Type', size='Somme Stats', title="Puissance des Pokémon")
-st.plotly_chart(fig1)
+# ---- Graphique d'évolution des stats des types par génération ----
+st.subheader("Évolution des Stats Totales des Pokémon par Type et Génération")
+
+# 📌 Transformer la colonne Type (qui contient ['Plante', 'Vol']) en lignes séparées
+df_exploded = df.explode("Type")
+
+# 📊 Regrouper les stats totales par Génération et Type
+stats_by_type_gen = df_exploded.groupby(["Génération", "Type"])["Somme Stats"].sum().reset_index()
+
+st.write(stats_by_type_gen[stats_by_type_gen["Type"] == "Poison"])
+
+# 🎨 Création du graphique avec une ligne par type
+fig3 = px.line(stats_by_type_gen, 
+               x="Génération", 
+               y="Somme Stats", 
+               color="Type",  
+               markers=True,
+               color_discrete_map=type_colors,  # Personnalisation des couleurs
+               title="Évolution des Stats Totales des Pokémon par Type et Génération")
+
+# ✅ Affichage dans Streamlit
+st.plotly_chart(fig3)
 
 # ---- Tableau des Pokémon ----
 st.subheader("Classement des Pokémon par puissance")
@@ -95,18 +117,34 @@ st.dataframe(filtered_df[['Noms', 'Primary Type', 'Somme Stats', 'Génération']
 
 # ---- Histogramme des Types ----
 st.subheader("Distribution des Types de Pokémon")
-type_counts = df['Primary Type'].value_counts()
-fig2, ax = plt.subplots()
-type_counts.plot(kind='bar', ax=ax, color='skyblue')
-st.pyplot(fig2)
+
+# 📌 Ajouter un slider pour choisir la plage de générations
+min_gen, max_gen = int(df["Génération"].min()), int(df["Génération"].max())
+selected_range = st.slider("Sélectionner une génération", min_gen, max_gen, (min_gen, max_gen), key="gen_slider")
+
+
+# 📌 Filtrer le dataframe en fonction des générations sélectionnées
+filtered_df = df[(df["Génération"] >= selected_range[0]) & (df["Génération"] <= selected_range[1])]
+
+# 📌 Transformer la colonne Type (qui contient ['Plante', 'Vol']) en lignes séparées
+all_types = filtered_df["Type"].explode()
+
+# 📊 Compter les occurrences de chaque type
+type_counts = all_types.value_counts().reset_index(name="Nombre de Pokémon")
+type_counts.columns = ["Type", "Nombre de Pokémon"]  # Renomme les colonnes pour éviter l'erreur
+
+# 🎨 Création du graphique interactif avec infobulles
+fig2 = px.bar(type_counts, 
+              x="Type", 
+              y="Nombre de Pokémon", 
+              text="Nombre de Pokémon",  # Afficher le nombre sur les barres
+              color="Type",  # Ajoute des couleurs par type
+              title="Répartition des Pokémon par Type en fonction des Générations")
+
+# ✅ Affichage dans Streamlit
+st.plotly_chart(fig2)
 
 # ---- Comparaison de Pokémon ----
-
-base_url = "https://raw.githubusercontent.com/LeTibs/pokemon/main/Data/Images/"
-
-def get_pokemon_image_path(pokemon_name):
-    return f"{base_url}{pokemon_name}.png"
-
 # ---- Création des Colonnes ----
 col1, col2, col3 = st.columns([1, 2, 1])  # La colonne centrale est plus large
 
@@ -128,11 +166,9 @@ with col3:
         st.warning(f"Image introuvable pour {poke2}")
 
 # ---- Récupération des statistiques ----
-def get_pokemon_stats(name):
-    return df[df['Noms'] == name][['PV', 'Attaque', 'Attaque Spéciale', 'Défense', 'Défense Spéciale', 'Vitesse']].values.flatten()
 
-stats1 = get_pokemon_stats(poke1)
-stats2 = get_pokemon_stats(poke2)
+stats1 = get_pokemon_stats(poke1, df)
+stats2 = get_pokemon_stats(poke2, df)
 
 # ---- Création du Radar Chart ----
 labels = ['PV', 'Attaque', 'Attaque Spéciale', 'Défense', 'Défense Spéciale', 'Vitesse']
@@ -143,10 +179,14 @@ angles += angles[:1]
 
 fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
 
-ax.fill(angles, stats1, alpha=0.3, label=poke1)
-ax.fill(angles, stats2, alpha=0.3, label=poke2)
-ax.plot(angles, stats1, linewidth=2)
-ax.plot(angles, stats2, linewidth=2)
+color1 = get_dominant_color(poke1, k=4, threshold=50)
+color2 = get_dominant_color(poke2, k=4, threshold=50)
+
+
+ax.fill(angles, stats1, color= color1, alpha=0.3, label=poke1)
+ax.fill(angles, stats2, color= color2, alpha=0.3, label=poke2)
+ax.plot(angles, stats1, color= color1, linewidth=2)
+ax.plot(angles, stats2, color= color2, linewidth=2)
 
 ax.set_xticks(angles[:-1])
 ax.set_xticklabels(labels)
