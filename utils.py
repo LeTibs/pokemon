@@ -21,9 +21,10 @@ def get_pokemon_stats(name, df):
     return df[df['Noms'] == name][['PV', 'Attaque', 'Attaque Spéciale', 'Défense', 'Défense Spéciale', 'Vitesse']].values.flatten()
 
 ##############################################################################
-base_url = "https://raw.githubusercontent.com/LeTibs/pokemon/main/Data/Images/"
+
 
 def get_pokemon_image_path(pokemon_name):
+    base_url = "https://raw.githubusercontent.com/LeTibs/pokemon/main/Data/Images/"
     return f"{base_url}{pokemon_name}.png"
 
 ##############################################################################

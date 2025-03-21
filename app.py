@@ -87,6 +87,8 @@ type_filter = st.sidebar.multiselect("Sélectionner un type", df['Primary Type']
 
 # Filtrage des données
 filtered_df = df[(df['Génération'].between(*gen_filter)) & (df['Primary Type'].isin(type_filter))]
+st.markdown("<br><br>", unsafe_allow_html=True)  # Ajoute un espace vertical
+
 
 # ---- Graphique d'évolution des stats des types par génération ----
 st.subheader("Évolution des Stats Totales des Pokémon par Type et Génération")
@@ -97,23 +99,22 @@ df_exploded = df.explode("Type")
 # 📊 Regrouper les stats totales par Génération et Type
 stats_by_type_gen = df_exploded.groupby(["Génération", "Type"])["Somme Stats"].sum().reset_index()
 
-st.write(stats_by_type_gen[stats_by_type_gen["Type"] == "Poison"])
-
 # 🎨 Création du graphique avec une ligne par type
 fig3 = px.line(stats_by_type_gen, 
                x="Génération", 
                y="Somme Stats", 
                color="Type",  
                markers=True,
-               color_discrete_map=type_colors,  # Personnalisation des couleurs
-               title="Évolution des Stats Totales des Pokémon par Type et Génération")
+               color_discrete_map=type_colors)  # Personnalisation des couleurs
 
 # ✅ Affichage dans Streamlit
 st.plotly_chart(fig3)
 
 # ---- Tableau des Pokémon ----
 st.subheader("Classement des Pokémon par puissance")
-st.dataframe(filtered_df[['Noms', 'Primary Type', 'Somme Stats', 'Génération']].sort_values(by='Somme Stats', ascending=False))
+st.dataframe(filtered_df[['Noms', 'Primary Type', 'Somme Stats', 'Génération']].sort_values(by='Somme Stats', ascending=False), height=250)
+
+st.markdown("<br><br>", unsafe_allow_html=True)  # Ajoute un espace vertical
 
 # ---- Histogramme des Types ----
 st.subheader("Distribution des Types de Pokémon")
@@ -138,11 +139,18 @@ fig2 = px.bar(type_counts,
               x="Type", 
               y="Nombre de Pokémon", 
               text="Nombre de Pokémon",  # Afficher le nombre sur les barres
-              color="Type",  # Ajoute des couleurs par type
-              title="Répartition des Pokémon par Type en fonction des Générations")
+              color="Type",
+              color_discrete_map=type_colors # Ajoute des couleurs par type
+)
+              
 
 # ✅ Affichage dans Streamlit
 st.plotly_chart(fig2)
+
+st.markdown("<br><br>", unsafe_allow_html=True)  # Ajoute un espace vertical
+st.subheader("Comparaison radar chart")
+
+
 
 # ---- Comparaison de Pokémon ----
 # ---- Création des Colonnes ----
@@ -198,24 +206,44 @@ ax.legend(loc="upper center", bbox_to_anchor=(0.5, 1.15), ncol=2, frameon=False,
 with col2:
     st.pyplot(fig)
 
+
+
+
 # ---- Treemap ----
-st.subheader("Treemap des Pokémon")
 # 📸 Ajouter une colonne "Image" avec les chemins réels des images
-df["Image"] = df["Noms"].apply(lambda x: get_pokemon_image_path(x))
+# 🔸 1. Créer les colonnes "Nombre de Types" et "Stats Normalisées"
+df["Nombre de Types"] = df["Type"].apply(len)
+df["Stats Normalisées"] = df["Somme Stats"] / df["Nombre de Types"]
 
-# 🏆 Création du Treemap avec les images en `customdata`
-fig4 = px.treemap(
-    df, 
-    path=['Génération', 'Primary Type', 'Noms'], 
-    values='Somme Stats', 
-    title="Répartition des Pokémon par Génération et Type",
-    custom_data=['Image']  # Associe l’image à chaque Pokémon
+# 🔸 3. Exploser les types (après toutes les colonnes calculées)
+df_exploded = df.explode("Type")
+
+# 🔸 4. Créer le label HTML (image + stats)
+# 🔹 1️⃣ Créer un label HTML avec les stats formatées
+df_exploded["Label Stats"] = df_exploded.apply(lambda row: 
+    f"<b>{row['Noms']}</b><br>"  # Nom du Pokémon en gras
+    f"❤️ PV: {row['PV']} | ⚔️ Attaque: {row['Attaque']}<br>"  # PV et Attaque
+    f"🛡️ Défense: {row['Défense']} | 🌀 Att Spé: {row['Attaque Spéciale']}<br>"  # Défense et Attaque Spéciale
+    f"🛡️ Déf Spé: {row['Défense Spéciale']} | ⚡ Vit: {row['Vitesse']}", 
+    axis=1
 )
 
-# 🎨 Affichage des images au survol (si elles existent)
-fig4.update_traces(
-    hovertemplate="<b>%{label}</b><br><img src='%{customdata[0]}' width='50'>" 
+# 🔹 2️⃣ Créer le Treemap avec les stats affichées
+fig_treemap = px.treemap(
+    df_exploded, 
+    path=['Génération', 'Type', 'Label Stats'],  # Utiliser le label avec stats
+    values="Stats Normalisées",
+    color="Type",
+    color_discrete_map=type_colors
 )
 
-# 📊 Affichage du graphique
-st.plotly_chart(fig4)
+# 🔹 3️⃣ S'assurer que le texte des cases affiche bien les stats
+fig_treemap.update_traces(textinfo="label")
+
+# 🔹 4️⃣ Afficher le Treemap dans Streamlit
+st.plotly_chart(fig_treemap)
+
+
+
+
+
