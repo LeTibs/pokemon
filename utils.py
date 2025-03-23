@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 import numpy as np
-import cv2
 import matplotlib.colors as mcolors
 from PIL import Image
 from io import BytesIO
