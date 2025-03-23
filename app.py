@@ -3,8 +3,6 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 import numpy as np
-import os
-import cv2
 from PIL import Image
 from io import BytesIO
 from sklearn.cluster import KMeans
