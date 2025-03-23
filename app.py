@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 from sklearn.cluster import KMeans
-from utils import get_dominant_color, get_pokemon_image_path, get_pokemon_stats, load_pokemon_data, type_colors
+from poke_utils import get_dominant_color, get_pokemon_image_path, get_pokemon_stats, load_pokemon_data, type_colors
 
 # Charger les données
 df = load_pokemon_data()
